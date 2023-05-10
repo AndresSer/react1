@@ -13,7 +13,7 @@ import Footer from './componentes/Footer/Footer';
 function App() {
 
   // los hook siempre se deben declarar fuera del return
-  const [mostrarFormulario,actualizarmostrar] = useState(true) // moestrarFomrulario = true
+  const [mostrarFormulario,actualizarmostrar] = useState(false) // moestrarFomrulario = true
   //arreglo colaboradores
   const [colaboradores,actualizarcolaboradores]= useState([
     {
@@ -22,6 +22,7 @@ function App() {
       foto:"https://github.com/harlandlohora.png",
       nombre:"Andres serrano ",
       puesto:"Bernardo Feria",
+      Fav: true,
     },
     {
       id: uuidv4(),
@@ -29,6 +30,7 @@ function App() {
       foto:"https://github.com/harlandlohora.png",
       nombre:"Andres serrano",
       puesto:"Diseñador grafico",
+      Fav: false,
     },
     {
       id: uuidv4(),
@@ -36,6 +38,7 @@ function App() {
       foto:"https://github.com/harlandlohora.png",
       nombre:"Andres serrano ",
       puesto:"Luisa Amaya ",
+      Fav: false,
     },
     {
       id: uuidv4(),
@@ -43,6 +46,7 @@ function App() {
       foto:"https://github.com/harlandlohora.png",
       nombre:"Javier Leon ",
       puesto:"Diseñador grafico ",
+      Fav: false,
     },
     {
       id: uuidv4(),
@@ -50,6 +54,7 @@ function App() {
       foto:"https://github.com/harlandlohora.png",
       nombre:"Andres serrano ",
       puesto:"Diseñador grafico ",
+      Fav: false,
     },
     {
       id: uuidv4(),
@@ -57,6 +62,7 @@ function App() {
       foto:"https://github.com/harlandlohora.png",
       nombre:"Jaime Barrios ",
       puesto:"Diseñador grafico ",
+      Fav: false,
     },
 
   ])
@@ -154,6 +160,20 @@ function App() {
     console.log("crear equipo")
     actualizarEquipos([...equipos,{...nuevoEquipo,id:uuidv4()}])
   }
+
+  //like
+  const like = (id) =>{
+    console.log("like", id)
+    const colaboradoresActualizados = colaboradores.map((colaborador)=>{
+      if(colaborador.id === id){
+        colaborador.fav = !colaborador.fav
+      }
+      return colaborador
+    })
+    actualizarcolaboradores(colaboradoresActualizados)
+
+  }
+
   return (
     <div>
       <Header/>                                       {/*seMuestra : noSeMuestra*/}  
@@ -175,6 +195,7 @@ function App() {
         colaboradores={colaboradores.filter(colaborador => colaborador.equipo === equipo.titulo)}
         eliminarColaborador={eliminarColaborador}
         actualizarColor={actualizarColor}
+        like={like}
         />
         
         )
